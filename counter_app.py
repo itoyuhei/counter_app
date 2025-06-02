@@ -1,20 +1,15 @@
-import tkinter as tk
+import streamlit as st
 
-count = 0
+st.title("Counter App")
+
+# セッション状態にカウンターを保存
+if 'count' not in st.session_state:
+    st.session_state.count = 0
 
 def increment():
-    global count
-    count += 1
-    label.config(text=f"Count: {count}")
+    st.session_state.count += 1
 
-root = tk.Tk()
-root.title("Counter App")
-root.geometry("200x100")
+if st.button("カウント"):
+    increment()
 
-label = tk.Label(root, text="Count: 0", font=("Arial", 16))
-label.pack(pady=10)
-
-button = tk.Button(root, text="カウント", command=increment)
-button.pack()
-
-root.mainloop()
+st.write(f"Count: {st.session_state.count}")
